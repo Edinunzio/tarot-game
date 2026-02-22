@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Card flip ────────────────────────────────────────────────────────────── */
+
+.card-wrapper {
+  perspective: 1200px;
+  width: 160px;
+  height: 268px;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.card-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+.card-face,
+.card-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 0.5rem;
+}
+
+.card-face {
+  transform: rotateY(180deg);
+}
+
+/* ─── Shuffle animation ────────────────────────────────────────────────────── */
+
+@keyframes shuffle {
+  0%   { transform: translateY(0px)  rotate(var(--r, 0deg)); }
+  30%  { transform: translateY(-6px) rotate(calc(var(--r, 0deg) + 2deg)); }
+  60%  { transform: translateY(3px)  rotate(calc(var(--r, 0deg) - 1deg)); }
+  100% { transform: translateY(0px)  rotate(var(--r, 0deg)); }
+}
+
+.shuffle-card {
+  animation: shuffle 1s ease-in-out infinite;
+}
